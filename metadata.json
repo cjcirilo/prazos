@@ -1,0 +1,5 @@
+{
+  "name": "Calculadora Pro",
+  "description": "Uma calculadora avançada de prazos processuais para advogados brasileiros, suportando Novo CPC, CPP, CLT e todos os tribunais do Brasil.",
+  "requestFramePermissions": []
+}
