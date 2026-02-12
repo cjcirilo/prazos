@@ -7,6 +7,34 @@ export enum RegraPrazo {
   JUIZADO_ESPECIAL = 'Juizado Especial'
 }
 
+export enum UnidadeContagem {
+  DIAS_UTEIS = 'Dias Úteis',
+  DIAS_CORRIDOS = 'Dias Corridos',
+  HORAS = 'Horas'
+}
+
+export enum Disponibilizacao {
+  DJE = 'DJE',
+  DJEN = 'DJEN'
+}
+
+export enum TipoComunicacao {
+  CITACAO_ELETRONICA = 'Citação Eletrônica',
+  INTIMACAO_PESSOAL = 'Intimação Pessoal',
+  PUBLICACAO_PADRAO = 'Publicação Comum'
+}
+
+export enum TipoPessoa {
+  FISICA = 'Pessoa Física',
+  JURIDICA_PRIVADA = 'Jurídica de Direito Privado',
+  JURIDICA_PUBLICA = 'Jurídica de Direito Público'
+}
+
+export enum Confirmacao {
+  CONFIRMADA = 'Confirmada',
+  NAO_CONFIRMADA = 'Não Confirmada'
+}
+
 export enum Instancia {
   PRIMEIRA = '1ª Instância',
   SEGUNDA = '2ª Instância'
@@ -50,8 +78,18 @@ export interface SimulationDay {
 
 export interface DeadlineParams {
   dias: number;
+  unidade: UnidadeContagem;
   regra: RegraPrazo;
   dataEvento: string;
+  horaEvento: string;
+  
+  // Novos campos de citação/comunicação
+  disponibilizacao: Disponibilizacao;
+  tipoComunicacao: TipoComunicacao;
+  destinatario: TipoPessoa;
+  statusConfirmacao: Confirmacao;
+  dataConfirmacao: string;
+
   tribunal: string;
   tipo: TipoProcesso;
   sistema: Sistema;
@@ -64,9 +102,12 @@ export interface DeadlineParams {
 
 export interface CalculationResult {
   dataFinal: Date;
+  dataInicioContagem: Date;
   diasUteis: number;
   diasCorridos: number;
   feriadosEncontrados: DetectedHoliday[];
   explicação: string;
   simulationLog: SimulationDay[];
+  isHora?: boolean;
+  aviso?: string;
 }
